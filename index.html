@@ -16,10 +16,59 @@
       crossorigin="anonymous"
     />
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gorditas:wght@400;700&family=Righteous&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Style -->
+    <link rel="stylesheet" href="style.css" />
+
     <title>Number Guessing Game</title>
   </head>
   <body>
-    <h1>Number Guessing Game</h1>
+    <div class="container">
+      <header>
+        <h1 class="text-center text-info mt-4">Number Guessing Game</h1>
+      </header>
+
+      <main class="text-center mt-4">
+        <h2>Chance Left</h2>
+        <h1>3</h1>
+
+        <form class="input-group">
+          <input
+            class="form-control guessInput"
+            type="number"
+            placeholder="Enter a number between 1 to 10"
+          />
+          <button class="btn btn-primary guessSubmit" type="submit">
+            Guess
+          </button>
+        </form>
+
+        <div class="row my-4">
+          <div class="col-md-6">
+            <h3>Your Guesses</h3>
+            <ul class="list-group">
+              <li class="list-group-item p-1 yourGuess">1</li>
+              <li class="list-group-item p-1 yourGuess">2</li>
+              <li class="list-group-item p-1 yourGuess">3</li>
+            </ul>
+          </div>
+
+          <div class="col-md-6">
+            <h3>BOT Guess</h3>
+            <ul class="list-group">
+              <li class="list-group-item p-4 botGuess">5</li>
+            </ul>
+          </div>
+        </div>
+        <button class="btn btn-info">Reload</button>
+      </main>
+    </div>
 
     <script src="script/script.js"></script>
   </body>

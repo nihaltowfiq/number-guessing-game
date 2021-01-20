@@ -1,0 +1,36 @@
+/* disable up down arrow keys input number */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+/* disable up down arrow keys input number */
+
+body {
+  font-family: "Righteous", cursive;
+}
+header > h1 {
+  font-family: "Gorditas", cursive;
+  font-weight: bold;
+}
+
+.guessInput {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.guessSubmit {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.yourGuess {
+  font-size: 30px;
+}
+.botGuess {
+  font-size: 75px;
+}
