@@ -28,7 +28,7 @@ header > h1 {
   border-bottom-left-radius: 0;
 }
 
-.yourGuess {
+.userGuess {
   font-size: 30px;
 }
 .botGuess {
