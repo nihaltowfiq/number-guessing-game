@@ -1,6 +1,8 @@
 const guessInput = document.querySelector(".guessInput");
 const guessSubmit = document.querySelector(".guessSubmit");
 const botGuess = document.querySelector(".botGuess");
+const userGuesses = document.querySelector(".userGuesses");
+const userGuess = document.getElementsByClassName("userGuess");
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -12,19 +14,36 @@ console.log(randomNumber);
 
 guessSubmit.addEventListener("click", getInput);
 
+// for(let i = 0; i < userGuess.length; i++){
+
+// }
+
+let chances = 1;
+
 function getInput(event) {
   event.preventDefault();
-  let chance = 3;
-  for (let i = 1; i <= chance; i++) {
-    let input = guessInput.value;
-    if (input > randomNumber) {
-      console.log("Correct answer is smaller!");
-    } else if (input < randomNumber) {
-      console.log("Correct answer is greater!");
-    } else {
-      console.log("You Win");
-    }
-    console.log("You Lose");
-    break;
+  let input = guessInput.value;
+  if (input > randomNumber) {
+    const li = document.createElement("li");
+    li.className = "list-group-item p-1 userGuess";
+    li.textContent = input;
+    userGuesses.appendChild(li);
+    console.log("Correct answer is smaller!");
+  } else if (input < randomNumber) {
+    const li = document.createElement("li");
+    li.className = "list-group-item p-1 userGuess";
+    li.textContent = input;
+    userGuesses.appendChild(li);
+    console.log("Correct answer is greater!");
+  } else {
+    const li = document.createElement("li");
+    li.className = "list-group-item p-1 userGuess";
+    li.textContent = input;
+    userGuesses.appendChild(li);
+
+    guessSubmit.setAttribute("disabled", "");
+    console.log("You Win!");
   }
+
+  guessInput.value = "";
 }
