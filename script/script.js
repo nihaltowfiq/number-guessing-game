@@ -4,6 +4,7 @@ const botGuess = document.querySelector(".botGuessUL");
 const userGuesses = document.querySelector(".userGuesses");
 const userGuess = document.getElementsByClassName("userGuess");
 const guessCount = document.getElementById("guessCount");
+const reload = document.querySelector(".reload");
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -15,37 +16,17 @@ console.log(randomNumber);
 
 guessSubmit.addEventListener("click", getInput);
 
-// for(let i = 0; i < userGuess.length; i++){
-
-// }
-
 let chances = 1;
 let count = 3;
 guessCount.innerText = count;
 
 function getInput(event) {
   event.preventDefault();
-  guessCount.innerText = --count;
+
   let input = guessInput.value;
 
   if (chances <= 3) {
-    if (input > randomNumber) {
-      const userLi = document.createElement("li");
-      userLi.className = "list-group-item p-1 userGuess";
-      userLi.textContent = input;
-      userGuesses.appendChild(userLi);
-      showAlert("Correct answer is smaller!", "warning");
-      chances++;
-      console.log("Correct answer is smaller!");
-    } else if (input < randomNumber) {
-      const userLi = document.createElement("li");
-      userLi.className = "list-group-item p-1 userGuess";
-      userLi.textContent = input;
-      userGuesses.appendChild(userLi);
-      showAlert("Correct answer is greater!", "warning");
-      chances++;
-      console.log("Correct answer is greater!");
-    } else {
+    if (count == 0 && input != randomNumber) {
       const userLi = document.createElement("li");
       userLi.className = "list-group-item p-1 userGuess";
       userLi.textContent = input;
@@ -57,25 +38,43 @@ function getInput(event) {
       botGuess.appendChild(BotLi);
 
       guessSubmit.setAttribute("disabled", "");
-      showAlert("You Win!", "success");
-      console.log("You Win!");
+      showAlert("You Lose!", "danger");
+      console.log("You Lose!");
+    } else {
+      if (input > randomNumber) {
+        const userLi = document.createElement("li");
+        userLi.className = "list-group-item p-1 userGuess";
+        userLi.textContent = input;
+        userGuesses.appendChild(userLi);
+        showAlert("Correct answer is smaller!", "warning");
+        chances++;
+        console.log("Correct answer is smaller!");
+      } else if (input < randomNumber) {
+        const userLi = document.createElement("li");
+        userLi.className = "list-group-item p-1 userGuess";
+        userLi.textContent = input;
+        userGuesses.appendChild(userLi);
+        showAlert("Correct answer is greater!", "warning");
+        chances++;
+        console.log("Correct answer is greater!");
+      } else {
+        const userLi = document.createElement("li");
+        userLi.className = "list-group-item p-1 userGuess";
+        userLi.textContent = input;
+        userGuesses.appendChild(userLi);
+
+        const BotLi = document.createElement("li");
+        BotLi.className = "list-group-item p-4 botGuess";
+        BotLi.textContent = randomNumber;
+        botGuess.appendChild(BotLi);
+
+        guessSubmit.setAttribute("disabled", "");
+        showAlert("You Win!", "success");
+        console.log("You Win!");
+      }
     }
-  } else {
-    // const userLi = document.createElement("li");
-    // userLi.className = "list-group-item p-1 userGuess";
-    // userLi.textContent = input;
-    // userGuesses.appendChild(userLi);
-
-    const BotLi = document.createElement("li");
-    BotLi.className = "list-group-item p-4 botGuess";
-    BotLi.textContent = randomNumber;
-    botGuess.appendChild(BotLi);
-
-    guessSubmit.setAttribute("disabled", "");
-    showAlert("You Lose!", "danger");
-    console.log("You Lose!");
   }
-
+  guessCount.innerText = --count;
   guessInput.value = "";
 }
 
@@ -88,7 +87,13 @@ function showAlert(message, className) {
   const form = document.querySelector("form");
   main.insertBefore(div, form);
 
-  setTimeout(() => {
-    document.querySelector(".alert").remove();
-  }, 3000);
+  if (className == "warning") {
+    setTimeout(() => {
+      document.querySelector(".alert").remove();
+    }, 3000);
+  }
 }
+
+reload.addEventListener("click", () => {
+  window.location.reload();
+});
