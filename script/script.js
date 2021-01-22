@@ -2,7 +2,6 @@ const guessInput = document.querySelector(".guessInput");
 const guessSubmit = document.querySelector(".guessSubmit");
 const botGuess = document.querySelector(".botGuessUL");
 const userGuesses = document.querySelector(".userGuesses");
-const userGuess = document.getElementsByClassName("userGuess");
 const guessCount = document.getElementById("guessCount");
 const reload = document.querySelector(".reload");
 
@@ -22,7 +21,7 @@ guessCount.innerText = count;
 
 function getInput(event) {
   event.preventDefault();
-
+  guessCount.innerText = --count;
   let input = guessInput.value;
 
   if (chances <= 3) {
@@ -57,7 +56,7 @@ function getInput(event) {
         showAlert("Correct answer is greater!", "warning");
         chances++;
         console.log("Correct answer is greater!");
-      } else {
+      } else if (input == randomNumber) {
         const userLi = document.createElement("li");
         userLi.className = "list-group-item p-1 userGuess";
         userLi.textContent = input;
@@ -74,7 +73,6 @@ function getInput(event) {
       }
     }
   }
-  guessCount.innerText = --count;
   guessInput.value = "";
 }
 
