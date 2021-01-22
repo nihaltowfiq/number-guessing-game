@@ -1,9 +1,22 @@
+const start = document.querySelector(".startBtn");
+const section = document.querySelector("section");
+const main = document.querySelector("main");
 const guessInput = document.querySelector(".guessInput");
 const guessSubmit = document.querySelector(".guessSubmit");
 const botGuess = document.querySelector(".botGuessUL");
 const userGuesses = document.querySelector(".userGuesses");
 const guessCount = document.getElementById("guessCount");
 const reload = document.querySelector(".reload");
+
+guessSubmit.addEventListener("click", getInput);
+
+start.addEventListener("click", startTheGame);
+
+function startTheGame() {
+  section.remove();
+  main.style.visibility = "visible";
+  main.style.marginTop = "";
+}
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -13,16 +26,15 @@ function getRandomInt(min, max) {
 const randomNumber = getRandomInt(1, 11);
 console.log(randomNumber);
 
-guessSubmit.addEventListener("click", getInput);
-
 let chances = 1;
 let count = 3;
 guessCount.innerText = count;
 
 function getInput(event) {
   event.preventDefault();
-  guessCount.innerText = --count;
   let input = guessInput.value;
+
+  guessCount.innerText = --count;
 
   if (chances <= 3) {
     if (count == 0 && input != randomNumber) {
@@ -37,8 +49,7 @@ function getInput(event) {
       botGuess.appendChild(BotLi);
 
       guessSubmit.setAttribute("disabled", "");
-      showAlert("You Lose!", "danger");
-      console.log("You Lose!");
+      showAlert("You Lose! Better Luck Next Time.", "danger");
     } else {
       if (input > randomNumber) {
         const userLi = document.createElement("li");
@@ -47,7 +58,6 @@ function getInput(event) {
         userGuesses.appendChild(userLi);
         showAlert("Correct answer is smaller!", "warning");
         chances++;
-        console.log("Correct answer is smaller!");
       } else if (input < randomNumber) {
         const userLi = document.createElement("li");
         userLi.className = "list-group-item p-1 userGuess";
@@ -55,7 +65,6 @@ function getInput(event) {
         userGuesses.appendChild(userLi);
         showAlert("Correct answer is greater!", "warning");
         chances++;
-        console.log("Correct answer is greater!");
       } else if (input == randomNumber) {
         const userLi = document.createElement("li");
         userLi.className = "list-group-item p-1 userGuess";
@@ -68,8 +77,7 @@ function getInput(event) {
         botGuess.appendChild(BotLi);
 
         guessSubmit.setAttribute("disabled", "");
-        showAlert("You Win!", "success");
-        console.log("You Win!");
+        showAlert("Congratulations! You Win!", "success");
       }
     }
   }

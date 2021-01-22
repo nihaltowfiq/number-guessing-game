@@ -34,3 +34,7 @@ header > h1 {
 .botGuess {
   font-size: 75px;
 }
+
+main {
+  visibility: hidden;
+}
